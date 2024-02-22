@@ -1,95 +1,79 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import './page.css';
+
+import { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { string, z } from 'zod';
+
+
+const schema = z.object({
+  taskName: string()
+    .min(10, 'Digite no mínimo 10 letras')
+    .max(40, 'Digite no máximo 40 letras'),
+  taskSubdescription: string()
+    .min(10, 'Digite no mmínimo 10 letras')
+    .max(80, 'Digite no mmáximo 80 letras'),
+  taskDescription: string()
+    .min(50, 'Digite no mínimo 30 letras')
+    .max(800, 'Digite no máximo 300 letras'),
+})
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    resolver: zodResolver(schema)
+  });
+
+  const onSubmit = async (data) => {
+    await fetch("http://localhost:3003/tickets", {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        id: Math.floor(Math.random() * 100000000),
+        taskName: data.taskName,
+        taskSubdescription: data.taskSubdescription, 
+        taskDescription: data.taskDescription
+    })
+    })
+      .then((res) => alert('Ticket aberto com sucesso'))
+      .catch((error) => console.log(error.message))
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="main-wrapper">
+      <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
+        <div className="taskName-taskSubDescription-group">
+          <input
+            placeholder="Nome da Tarefa"
+            {...register("taskName", { required: true })}
+            defaultValue=""
+          />
+          {errors.taskName && <span className="span-error-taskName">{errors.taskName.message}</span>}
+
+          <input
+            placeholder="Breve descrição"
+            {...register("taskSubdescription", { required: true })}
+            defaultValue=""
+          />
+          {errors.taskSubdescription && <span className="span-error-taskSubDescription">{errors.taskSubdescription.message}</span>}
+
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+        <textarea
+          placeholder="Descrição da tarefa"
+          {...register("taskDescription", { required: true })}
+          defaultValue=""
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+        </textarea>
+        {errors.taskDescription && <span className="span-error-taskDescription">{errors.taskDescription.message}</span>}
+        <button>Cadastrar ticket</button>
+      </form>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
   );
 }

@@ -1,0 +1,150 @@
+.main-wrapper {
+    width: 100%;
+    height: 100vh;
+
+    display: grid;
+    place-items: center;
+
+    background: #f4f4f4;
+}
+
+.form-wrapper {
+    width: 50%;
+    height: 90%;
+
+    padding: 1em;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4em;
+}
+
+.taskName-taskSubDescription-group {
+    width: 100%;
+
+    display: flex;
+    gap: 2em;
+}
+
+.taskName-taskSubDescription-group input {
+    width: 50%;
+
+    padding: 1.2em;
+
+    border: 0;
+    border-radius: .25em;
+
+    background: #e2eff8;
+
+    font-size: 1.13em;
+
+    outline: 2px solid transparent;
+
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+    transition: all 300ms ease;
+}
+
+.form-wrapper input:focus {
+    outline: 2px solid #203e4c;
+
+    box-shadow: #203e4c42 0px 25px 20px -20px;
+}
+
+.form-wrapper .span-error-taskName {
+    width: 45%;
+
+    padding: .2em;
+
+    position: absolute;
+    top: 6%;
+
+    border-radius: .25em;
+
+    background: #f5303094;
+
+    color: #fefefe;
+}
+
+.form-wrapper .span-error-taskSubDescription {
+    width: 45%;
+
+    padding: 0.2em;
+
+    position: absolute;
+    top: 6%;
+    right: 2.5%;
+
+    border-radius: 0.25em;
+    background: #f5303094;
+
+    color: #fefefe;
+}
+
+.form-wrapper .span-error-taskDescription {
+    width: 95.5%;
+
+    padding: 0.2em;
+
+    position: absolute;
+    top: 26%;
+
+    border-radius: 0.25em;
+    background: #f5303094;
+
+    color: #fefefe;
+}
+
+.form-wrapper textarea {
+
+    padding: 2em;
+
+    height: 40%;
+
+    background: #e2eff8;
+
+    font-size: 1.13em;
+
+    resize: none;
+
+    border: 0;
+    border-radius: .25em;
+
+    outline: 2px solid transparent;
+
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+    transition: all 300ms ease;
+}
+
+.form-wrapper textarea:focus {
+    outline: 2px solid #203e4c;
+
+    box-shadow: #203e4c42 0px 25px 20px -20px;
+}
+
+.form-wrapper button {
+    padding: 1em;
+
+    border: 0;
+    border-radius: .25em;
+
+    font-size: 1.20em;
+
+    background: #e2eff8;
+
+    cursor: pointer;
+
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+    transition: all 300ms ease;
+}
+
+.form-wrapper button:hover {
+    background: #203e4c;
+
+    color: #e2eff8;
+}
