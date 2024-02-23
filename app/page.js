@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { string, z } from 'zod';
 
-const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL;
+const VERCEL_URL = 'https://sistema-de-tickets.vercel.app/'
 
 
 const schema = z.object({
@@ -32,9 +32,7 @@ export default function Home() {
     resolver: zodResolver(schema)
   });
 
-  const onSubmit = async (data) => {
-    console.log(VERCEL_URL);
-    
+  const onSubmit = async (data) => {    
     await fetch(`${VERCEL_URL}/tickets`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
