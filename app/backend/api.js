@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const vercelURL = process.env.VERCEL_URL;
+const vercelURL = process.env.VERCEL_URL || 3003;
 
 app.use(cors());
 app.use(express.json());
