@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3003;
+const vercelURL = process.env.VERCEL_URL;
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,6 +23,6 @@ app.post('/tickets', (req, res) => {
     console.log(req.body);
 })
 
-app.listen(port, () => {
-    console.log('Servidor iniciado na porta', port);
+app.listen(vercelURL, () => {
+    console.log('Servidor iniciado na porta', vercelURL);
 });
