@@ -33,6 +33,8 @@ export default function Home() {
   });
 
   const onSubmit = async (data) => {
+    console.log(VERCEL_URL);
+    
     await fetch(`${VERCEL_URL}/tickets`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
