@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { string, z } from 'zod';
 
-const VERCEL_URL = 'https://sistema-de-tickets.vercel.app/'
+const VERCEL_URL = 'https://sistema-de-tickets.vercel.app'
 
 
 const schema = z.object({
