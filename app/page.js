@@ -31,7 +31,7 @@ export default function Home() {
   });
 
   const onSubmit = async (data) => {    
-    await fetch(`https://sistema-de-tickets.vercel.app/tickets`, {
+    await fetch('/tickets', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
@@ -41,7 +41,7 @@ export default function Home() {
         taskDescription: data.taskDescription
     })
     })
-      .then((res) => alert('Ticket aberto com sucesso'))
+      .then((res) => alert('Ticket criado com sucesso'))
       .catch((error) => console.log(error.message))
   }
 

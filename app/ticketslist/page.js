@@ -11,15 +11,16 @@ export default function ListTickets() {
 
     useEffect(() => {
         const getData = async () => {
-            const reqData = await fetch('http://localhost:3003/tickets');
+            const reqData = await fetch('/tickets');
             const apiData = await reqData.json();
-            setData(apiData);
+
+            setData(apiData.ticketsList);
         }
 
         getData();
     }, []);
 
-    const handleTicketsContent = (id) =>  {
+    const handleTicketsContent = (id) => {
         const ticketsFilter = data.filter((ticket) => {
             return ticket.id == id;
         });
