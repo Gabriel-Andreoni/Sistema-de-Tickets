@@ -1,15 +1,14 @@
-export async function GET(request, params) {
-    const slug = params.slug;
-   return new Response(JSON.stringify({
-    id: slug,
-}))
-}
+export async function GET(request, context) {
+    const {params} = context;
 
-export async function POST(request, params) {
-    const body = await request.json();
-   
+    const getData = await fetch("http://localhost:3000/tickets");
+    const data = await getData.json();
+    
+    const uniqueTicket = data.ticketsList.filter(ticket => ticket.id === parseInt(params.id));
+
+
     return new Response(JSON.stringify({
-        data: body
+        data: uniqueTicket
     }))
 }
 
