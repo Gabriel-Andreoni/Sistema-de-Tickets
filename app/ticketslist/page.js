@@ -25,9 +25,20 @@ export default function ListTickets() {
             return ticket.id == id;
         });
 
-        console.log(data)
-        console.log(ticketsFilter);
         setFilteredTicket(ticketsFilter);
+    }
+
+    const handleDeleteTicket = async (id) => {
+        console.log(id);
+
+        await fetch(`/tickets/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id })
+        })
+        .then((response) => console.log(response))
     }
 
     return (
@@ -53,7 +64,7 @@ export default function ListTickets() {
 
                             <p>{ticket.taskDescription}</p>
 
-                            <button>Encerrar</button>
+                            <button onClick={() => handleDeleteTicket(ticket.id)}>Encerrar</button>
 
                         </div>
                     )
